@@ -55,9 +55,10 @@ class Graphics:
         root.title('Queen Problem')
         frame = tk.Frame(master=root)
         self.canvas = tk.Canvas(master=root, width=self.width, height=self.height, background='white')
-        self.page_lablel = tk.Label(master=root,text='0/125')
+        self.page_lablel = tk.Label(master=root,text='0/0')
         size_label = tk.Label(master=frame, text='size,queens:')
         self.size_input = tk.Entry(master=frame)
+        self.size_input.insert(0, '7,7')
         size_button = tk.Button(master=frame, text='solve', command=self.__set_new_size)
         
         self.canvas.grid(row=0, column=0, columnspan=2)
@@ -66,8 +67,9 @@ class Graphics:
         size_label.pack(side=tk.LEFT)
         self.size_input.pack(side=tk.LEFT)
         size_button.pack(side=tk.LEFT)
-        self.canvas.bind_all('<Left>',self.previous)
-        self.canvas.bind_all('<Right>',self.next)
+        self.page_lablel.bind('<Left>',self.previous)
+        self.page_lablel.bind('<Right>',self.next)
+        self.canvas.bind('<Button-1>', lambda e: self.page_lablel.focus())
         
         self.__load_image()
         self.__draw_solution()
